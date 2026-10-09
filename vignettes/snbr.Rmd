@@ -1,0 +1,102 @@
+---
+title: "Getting started with snbr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with snbr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 6, fig.height = 4)
+```
+
+The package fits regression models with skew-normal errors,
+$$
+y_i = \mathbf{x}_i^\top\beta + \varepsilon_i,\qquad
+\varepsilon_i \sim \mathrm{SN}(0, \sigma, \alpha),
+$$
+and a partially linear version in which one covariate enters through a
+penalized B-spline. Four estimators are available: maximum likelihood, the
+corrective estimator that subtracts the Cox and Snell second-order bias, and
+the mean and median bias-reducing adjusted score estimators.
+
+```{r}
+library(snbr)
+```
+
+## The Arctic lake data
+
+The data set `arcticlake` gives the sand, silt and clay proportions of 39
+sediment samples taken at different depths of an Arctic lake. We model the
+logit of the clay proportion as a quadratic function of depth, with depth
+expressed in hundreds of metres.
+
+```{r}
+arcticlake$d <- arcticlake$depth / 100
+fit_ml <- snreg(logit_clay ~ d + I(d^2), data = arcticlake, method = "ML")
+fit_ml
+```
+
+The maximum likelihood estimate of the shape is minus infinity. The decision
+is exact: `sn_mle()` compares the best finite value of the log-likelihood
+with its limit as $\alpha \to \pm\infty$, which is the log-likelihood of a
+half-normal regression fitted by constrained least squares.
+
+```{r}
+f <- sn_mle(cbind(1, arcticlake$d, arcticlake$d^2), arcticlake$logit_clay)
+f$loglik_limit   # limits as alpha -> -Inf and alpha -> +Inf
+f$finite
+```
+
+The corrective estimator needs a finite maximum likelihood estimate and is
+therefore not available. The adjusted score estimators are:
+
+```{r}
+fit_mean <- snreg(logit_clay ~ d + I(d^2), data = arcticlake, method = "mean")
+fit_med  <- snreg(logit_clay ~ d + I(d^2), data = arcticlake, method = "median")
+cbind(mean = coef(fit_mean), median = coef(fit_med))
+summary(fit_mean)
+```
+
+## A smooth effect of depth
+
+The quadratic was chosen by the authors of the earlier analysis among a few
+alternatives. A penalized spline lets the data decide; the smoothing
+parameter is chosen by AIC with effective degrees of freedom.
+
+```{r}
+fit_s <- snreg(logit_clay ~ 1, data = arcticlake, smooth = "d", method = "mean", k = 8)
+fit_s
+```
+
+```{r, fig.alt = "Logit of clay proportion against depth with the fitted location and mean curves."}
+th <- coef(fit_s)
+P <- length(th)
+delta <- th[P] / sqrt(1 + th[P]^2)
+loc <- fitted(fit_s)
+avg <- loc + th[P - 1] * sqrt(2 / pi) * delta   # E(y) = location + sigma * b * delta
+o <- order(arcticlake$d)
+plot(arcticlake$depth, arcticlake$logit_clay, pch = 19, col = "grey40",
+     ylim = range(c(arcticlake$logit_clay, loc)),
+     xlab = "depth (m)", ylab = "logit(clay)")
+lines(arcticlake$depth[o], loc[o], lwd = 2, col = "#14365d")
+lines(arcticlake$depth[o], avg[o], lwd = 2, lty = 2, col = "#e8a33d")
+legend("bottomright", c("location", "mean"), lwd = 2, lty = c(1, 2),
+       col = c("#14365d", "#e8a33d"), bty = "n")
+```
+
+The solid line is the location $\mathbf{x}_i^\top\beta + f(t_i)$ and
+the dashed line the mean. With a negative shape the errors are skewed to the
+left, so the location lies above the bulk of the data and the mean below it.
+
+## Second-order bias
+
+`sn_bias()` evaluates the Cox and Snell bias at any parameter value; it is
+the ingredient of both the corrective and the mean bias-reducing estimators.
+
+```{r}
+set.seed(1)
+X <- cbind(1, runif(50))
+sn_bias(c(-2, 2, 1, 5), X)
+```

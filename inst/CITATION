@@ -1,0 +1,11 @@
+bibentry(
+  bibtype = "Unpublished",
+  title = "Bias reduction and infinite shape estimates in linear and partially linear skew-normal regression",
+  author = c(person("Enio A. C.", "Lopes"), person("Klaus L. P.", "Vasconcellos"),
+             person("Raydonal", "Ospina")),
+  year = "2026",
+  note = "Manuscript submitted to Information and Inference: A Journal of the IMA",
+  textVersion = paste("Lopes, E. A. C., Vasconcellos, K. L. P. and Ospina, R. (2026).",
+                      "Bias reduction and infinite shape estimates in linear and partially",
+                      "linear skew-normal regression. Manuscript submitted to Information and Inference.")
+)

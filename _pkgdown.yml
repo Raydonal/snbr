@@ -1,0 +1,44 @@
+url: https://raydonal.github.io/snbr/
+
+template:
+  bootstrap: 5
+  math-rendering: mathjax
+  bslib:
+    primary: "#14365d"
+
+home:
+  title: "snbr: bias reduction in skew-normal regression"
+
+reference:
+- title: Model fitting
+  desc: Maximum likelihood with exact detection of infinite shape estimates, and the corrective and preventive bias-reduced estimators.
+  contents:
+  - snreg
+  - sn_mle
+  - sn_br
+  - sn_correct
+  - sn_boot
+  - snplm
+- title: Second-order bias and information
+  contents:
+  - sn_bias
+  - sn_info
+  - sn_cumulants
+  - sn_cumulants_fast
+- title: Likelihood
+  contents:
+  - sn_loglik
+  - rsnorm
+  - psnorm
+- title: Smooth terms
+  contents:
+  - pspline_basis
+  - predict_pspline
+- title: Data
+  contents:
+  - arcticlake
+
+articles:
+- title: Get started
+  contents:
+  - snbr

@@ -1,0 +1,24 @@
+Package: snbr
+Type: Package
+Title: Bias Reduction in Skew-Normal Regression
+Version: 0.2.0
+Authors@R: c(
+    person("Enio A. C.", "Lopes", role = "aut"),
+    person("Klaus L. P.", "Vasconcellos", role = "aut"),
+    person("Raydonal", "Ospina", email = "raydonal@castlab.org", role = c("aut", "cre")))
+Description: Maximum likelihood, corrective (Cox and Snell) and preventive
+    (mean and median bias-reducing adjusted score) estimation for linear and
+    partially linear regression models with skew-normal errors. Infinite
+    estimates of the shape parameter are detected exactly, the second-order
+    bias is computed from exact cumulants of the log-likelihood derivatives,
+    and the nonparametric component is represented by penalized B-splines.
+License: GPL (>= 3)
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: stats, quadprog, splines
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, sn
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+LazyData: true
+URL: https://raydonal.github.io/snbr/
+Config/roxygen2/version: 8.1.0
