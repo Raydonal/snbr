@@ -1,7 +1,7 @@
 # Parametric bootstrap bias correction
 
 Generates \`B\` samples from the model fitted by maximum likelihood,
-refits, and returns \\(2\\hat\\theta - \\bar\\theta^\*\\). Bootstrap
+refits, and returns \\2\hat\theta - \bar\theta^\*\\. Bootstrap
 replicates whose shape estimate is infinite are counted and, following
 the policy chosen by \`infinite\`, either discarded (the policy of the
 earlier versions of this work) or make the correction undefined.
@@ -14,23 +14,23 @@ sn_boot(theta, X, B = 500L, infinite = c("discard", "na"))
 
 ## Arguments
 
-  - theta:
-    
-    maximum likelihood estimate (finite).
+- theta:
 
-  - X:
-    
-    model matrix.
+  maximum likelihood estimate (finite).
 
-  - B:
-    
-    number of bootstrap samples.
+- X:
 
-  - infinite:
-    
-    \`"discard"\` or \`"na"\`.
+  model matrix.
+
+- B:
+
+  number of bootstrap samples.
+
+- infinite:
+
+  \`"discard"\` or \`"na"\`.
 
 ## Value
 
 A list with the corrected estimate \`theta\`, the number of infinite
-replicates \`n\_inf\` and the bootstrap mean \`mean\_star\`.
+replicates \`n_inf\` and the bootstrap mean \`mean_star\`.

@@ -10,18 +10,18 @@ predict_pspline(basis, gamma, tnew)
 
 ## Arguments
 
-  - basis:
-    
-    output of \[pspline\_basis()\].
+- basis:
 
-  - gamma:
-    
-    coefficients of the constrained basis.
+  output of \[pspline_basis()\].
 
-  - tnew:
-    
-    new values of the covariate.
+- gamma:
+
+  coefficients of the constrained basis.
+
+- tnew:
+
+  new values of the covariate.
 
 ## Value
 
-Vector of fitted values of \\(f\\) at \`tnew\`.
+Vector of fitted values of \\f\\ at \`tnew\`.

@@ -7,16 +7,16 @@ The maximum likelihood estimate of the shape parameter of the
 skew-normal distribution is infinite with positive probability in finite
 samples, and when it is finite its bias can be large. `snbr` provides
 
-  - maximum likelihood estimation with an exact test of whether the
-    estimate of the shape is infinite (comparison with the limiting
-    half-normal regression, computed by constrained least squares);
-  - the second-order (Cox and Snell) bias of all parameters, computed
-    from exact cumulants of the log-likelihood derivatives;
-  - the corrective estimator and the mean (Firth) and median (Kenne
-    Pagui, Salvan and Sartori) bias-reducing adjusted score estimators,
-    for the location coefficients, scale and shape jointly;
-  - a partially linear model with a P-spline term, with the second-order
-    bias of the penalized estimator at a fixed smoothing parameter.
+- maximum likelihood estimation with an exact test of whether the
+  estimate of the shape is infinite (comparison with the limiting
+  half-normal regression, computed by constrained least squares);
+- the second-order (Cox and Snell) bias of all parameters, computed from
+  exact cumulants of the log-likelihood derivatives;
+- the corrective estimator and the mean (Firth) and median (Kenne Pagui,
+  Salvan and Sartori) bias-reducing adjusted score estimators, for the
+  location coefficients, scale and shape jointly;
+- a partially linear model with a P-spline term, with the second-order
+  bias of the penalized estimator at a fixed smoothing parameter.
 
 ## Installation
 

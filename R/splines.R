@@ -117,8 +117,7 @@ snplm <- function(X, t, y, method = c("BR", "ML"), k = 12L, lambda = NULL,
     if (is.null(best)) stop("fit did not converge")
   }
   th <- best$theta
-  nm <- c(colnames(X), colnames(bs$Z), "sigma", "alpha")
-  names(th) <- nm
+  names(th) <- .coef_names(X, bs$Z, extra_prefix = "f")
   gam <- th[p_lin + seq_len(ncol(bs$Z))]
   list(theta = th, beta = th[seq_len(p_lin)], gamma = gam,
        sigma = th[P - 1L], alpha = th[P], lambda = best$lambda, edf = best$edf,

@@ -157,8 +157,7 @@ sn_mle <- function(X, y, start = NULL, tol = 1e-8) {
   st <- if (is.null(start)) NULL else .to_scaled(start, sc)
   f <- .sn_mle_core(Xs, y, st, tol)
   f$theta <- .from_scaled(f$theta, sc)
-  nm <- c(colnames(X), "sigma", "alpha")
-  if (length(nm) == ncol(X) + 2L) names(f$theta) <- nm
+  names(f$theta) <- .coef_names(X)
   f
 }
 
@@ -222,8 +221,7 @@ sn_mle <- function(X, y, start = NULL, tol = 1e-8) {
     L <- .loglik_limit(X, y, sg)
     theta <- c(L$beta, L$sigma, sg * Inf)
   }
-  nm <- c(colnames(X), "sigma", "alpha")
-  if (length(nm) == p + 2L) names(theta) <- nm
+  names(theta) <- .coef_names(X)
   list(theta = theta, loglik = if (finite) best$loglik else max(lim),
        finite = finite, loglik_limit = lim)
 }
@@ -340,8 +338,7 @@ sn_br <- function(X, y, type = c("mean", "median"), start = NULL,
   }
   f <- .sn_br_core(Xs, y, type, st, Ss, lambda, maxit, tol)
   f$theta <- .from_scaled(f$theta, sc)
-  nm <- c(colnames(X), "sigma", "alpha")
-  if (length(nm) == ncol(X) + 2L) names(f$theta) <- nm
+  names(f$theta) <- .coef_names(X)
   f
 }
 
@@ -496,8 +493,7 @@ sn_br <- function(X, y, type = c("mean", "median"), start = NULL,
   }
   if (!res$conv) res <- list(theta = rep(NA_real_, P), conv = FALSE, it = maxit, val = NA)
   theta <- res$theta
-  nm <- c(colnames(X), "sigma", "alpha")
-  if (length(nm) == P) names(theta) <- nm
+  names(theta) <- .coef_names(X)
   list(theta = theta, converged = res$conv, iterations = res$it,
        adjusted_score = res$val, type = type,
        failure = if (res$conv) NA_character_ else

@@ -1,30 +1,30 @@
 # Skew-normal regression with bias reduction
 
-Fits the linear model \\(y\_i = x\_i^\\top\\beta + \\varepsilon\_i\\) or
-the partially linear model \\(y\_i = x\_i^\\top\\beta + f(t\_i) +
-\\varepsilon\_i\\), with \\(\\varepsilon\_i \\sim SN(0, \\sigma,
-\\alpha)\\) independent, by one of four methods:
+Fits the linear model \\y_i = x_i^\top\beta + \varepsilon_i\\ or the
+partially linear model \\y_i = x_i^\top\beta + f(t_i) + \varepsilon_i\\,
+with \\\varepsilon_i \sim SN(0, \sigma, \alpha)\\ independent, by one of
+four methods:
 
-  - \`"ML"\`:
-    
-    maximum likelihood; the shape estimate is reported as \`Inf\` or
-    \`-Inf\` when the likelihood has no finite maximizer (see
-    \[sn\_mle()\]).
+- \`"ML"\`:
 
-  - \`"CS"\`:
-    
-    the corrective estimator \\(\\hat\\theta - b(\\hat\\theta)\\) with
-    the Cox and Snell bias \\(b\\) (\[sn\_bias()\]).
+  maximum likelihood; the shape estimate is reported as \`Inf\` or
+  \`-Inf\` when the likelihood has no finite maximizer (see
+  \[sn_mle()\]).
 
-  - \`"mean"\`:
-    
-    the mean bias-reducing adjusted score estimator (Firth, 1993),
-    always finite in our experience.
+- \`"CS"\`:
 
-  - \`"median"\`:
-    
-    the median bias-reducing adjusted score estimator (Kenne Pagui,
-    Salvan and Sartori, 2017); linear models only.
+  the corrective estimator \\\hat\theta - b(\hat\theta)\\ with the Cox
+  and Snell bias \\b\\ (\[sn_bias()\]).
+
+- \`"mean"\`:
+
+  the mean bias-reducing adjusted score estimator (Firth, 1993), always
+  finite in our experience.
+
+- \`"median"\`:
+
+  the median bias-reducing adjusted score estimator (Kenne Pagui, Salvan
+  and Sartori, 2017); linear models only.
 
 With a smooth term only \`"ML"\` (penalized likelihood) and \`"mean"\`
 are available; see \[snplm()\].
@@ -44,30 +44,30 @@ snreg(
 
 ## Arguments
 
-  - formula:
-    
-    model formula for the location (linear part).
+- formula:
 
-  - data:
-    
-    data frame.
+  model formula for the location (linear part).
 
-  - smooth:
-    
-    optional name (character) of a covariate entering through a P-spline
-    term.
+- data:
 
-  - method:
-    
-    one of \`"mean"\`, \`"median"\`, \`"ML"\`, \`"CS"\`.
+  data frame.
 
-  - k:
-    
-    basis dimension of the smooth term.
+- smooth:
 
-  - lambda:
-    
-    optional fixed smoothing parameter.
+  optional name (character) of a covariate entering through a P-spline
+  term.
+
+- method:
+
+  one of \`"mean"\`, \`"median"\`, \`"ML"\`, \`"CS"\`.
+
+- k:
+
+  basis dimension of the smooth term.
+
+- lambda:
+
+  optional fixed smoothing parameter.
 
 ## Value
 

@@ -2,10 +2,9 @@
 
 Computes, by adaptive quadrature, the expected values of products of
 derivatives of the skew-normal log-density with respect to the reduced
-parameter \\((\\eta, \\sigma, \\alpha)\\), where \\(\\eta\\) is the
-location. These are the building blocks of the Fisher information, of
-the Cox and Snell second-order bias and of the bias-reducing adjusted
-scores.
+parameter \\(\eta, \sigma, \alpha)\\, where \\\eta\\ is the location.
+These are the building blocks of the Fisher information, of the Cox and
+Snell second-order bias and of the bias-reducing adjusted scores.
 
 ## Usage
 
@@ -15,17 +14,17 @@ sn_cumulants(alpha, sigma = 1, rel.tol = 1e-11)
 
 ## Arguments
 
-  - alpha:
-    
-    shape parameter (scalar).
+- alpha:
 
-  - sigma:
-    
-    scale parameter (scalar, default 1).
+  shape parameter (scalar).
 
-  - rel.tol:
-    
-    relative tolerance passed to \[stats::integrate()\].
+- sigma:
+
+  scale parameter (scalar, default 1).
+
+- rel.tol:
+
+  relative tolerance passed to \[stats::integrate()\].
 
 ## Value
 

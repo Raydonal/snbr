@@ -10,19 +10,19 @@ sn_info(theta, X, cu = NULL)
 
 ## Arguments
 
-  - theta:
-    
-    parameter vector \`c(beta, sigma, alpha)\`.
+- theta:
 
-  - X:
-    
-    model matrix of the location (n x p).
+  parameter vector \`c(beta, sigma, alpha)\`.
 
-  - cu:
-    
-    optional output of \[sn\_cumulants()\] at \`theta\`'s shape and
-    scale, to avoid recomputation.
+- X:
+
+  model matrix of the location (n x p).
+
+- cu:
+
+  optional output of \[sn_cumulants()\] at \`theta\`'s shape and scale,
+  to avoid recomputation.
 
 ## Value
 
-The \\((p+2) \\times (p+2)\\) Fisher information matrix.
+The \\(p+2) \times (p+2)\\ Fisher information matrix.

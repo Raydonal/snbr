@@ -1,12 +1,12 @@
 # Getting started with snbr
 
-The package fits regression models with skew-normal errors, \\\[ y\_i =
-\\mathbf{x}\_i^\\top\\beta + \\varepsilon\_i,\\qquad \\varepsilon\_i
-\\sim \\mathrm{SN}(0, \\sigma, \\alpha), \\\] and a partially linear
-version in which one covariate enters through a penalized B-spline. Four
-estimators are available: maximum likelihood, the corrective estimator
-that subtracts the Cox and Snell second-order bias, and the mean and
-median bias-reducing adjusted score estimators.
+The package fits regression models with skew-normal errors, \\ y_i =
+\mathbf{x}\_i^\top\beta + \varepsilon_i,\qquad \varepsilon_i \sim
+\mathrm{SN}(0, \sigma, \alpha), \\ and a partially linear version in
+which one covariate enters through a penalized B-spline. Four estimators
+are available: maximum likelihood, the corrective estimator that
+subtracts the Cox and Snell second-order bias, and the mean and median
+bias-reducing adjusted score estimators.
 
 ``` r
 library(snbr)
@@ -26,14 +26,18 @@ fit_ml
 #> Skew-normal regression, method: ML 
 #> (Intercept)           d      I(d^2)       sigma       alpha 
 #>      -2.238       7.882      -5.512       1.403        -Inf 
-#> The maximum likelihood estimate of the shape is infinite.
+#> The maximum likelihood estimate of the shape is infinite:
+#> no finite value of alpha maximizes the likelihood, so this is not a
+#> numerical failure. Refit with method = "mean" or "median" for a
+#> finite, bias-reduced estimate.
 ```
 
 The maximum likelihood estimate of the shape is minus infinity. The
-decision is exact: `sn_mle()` compares the best finite value of the
-log-likelihood with its limit as \\(\\alpha \\to \\pm\\infty\\), which
-is the log-likelihood of a half-normal regression fitted by constrained
-least squares.
+decision is exact:
+[`sn_mle()`](https://raydonal.github.io/snbr/reference/sn_mle.md)
+compares the best finite value of the log-likelihood with its limit as
+\\\alpha \to \pm\infty\\, which is the log-likelihood of a half-normal
+regression fitted by constrained least squares.
 
 ``` r
 f <- sn_mle(cbind(1, arcticlake$d, arcticlake$d^2), arcticlake$logit_clay)
@@ -106,21 +110,21 @@ legend("bottomright", c("location", "mean"), lwd = 2, lty = c(1, 2),
 ![Logit of clay proportion against depth with the fitted location and
 mean curves.](snbr_files/figure-html/unnamed-chunk-6-1.png)
 
-The solid line is the location \\(\\mathbf{x}\_i^\\top\\beta +
-f(t\_i)\\) and the dashed line the mean. With a negative shape the
-errors are skewed to the left, so the location lies above the bulk of
-the data and the mean below it.
+The solid line is the location \\\mathbf{x}\_i^\top\beta + f(t_i)\\ and
+the dashed line the mean. With a negative shape the errors are skewed to
+the left, so the location lies above the bulk of the data and the mean
+below it.
 
 ## Second-order bias
 
-`sn_bias()` evaluates the Cox and Snell bias at any parameter value; it
-is the ingredient of both the corrective and the mean bias-reducing
-estimators.
+[`sn_bias()`](https://raydonal.github.io/snbr/reference/sn_bias.md)
+evaluates the Cox and Snell bias at any parameter value; it is the
+ingredient of both the corrective and the mean bias-reducing estimators.
 
 ``` r
 set.seed(1)
 X <- cbind(1, runif(50))
 sn_bias(c(-2, 2, 1, 5), X)
-#>        sigma        alpha         <NA>         <NA> 
+#>        beta1        beta2        sigma        alpha 
 #>  0.014351341 -0.005007298 -0.017226608  1.829311658
 ```

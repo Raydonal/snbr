@@ -10,26 +10,26 @@ pspline_basis(t, k = 12L, degree = 3L, diff = 2L)
 
 ## Arguments
 
-  - t:
-    
-    covariate entering nonparametrically.
+- t:
 
-  - k:
-    
-    number of B-spline basis functions before the constraint.
+  covariate entering nonparametrically.
 
-  - degree:
-    
-    spline degree.
+- k:
 
-  - diff:
-    
-    order of the difference penalty.
+  number of B-spline basis functions before the constraint.
+
+- degree:
+
+  spline degree.
+
+- diff:
+
+  order of the difference penalty.
 
 ## Value
 
 A list with the constrained basis \`Z\` (n x (k-1)), the penalty \`S\`
-((k-1) x (k-1)) and the objects needed by \[predict\_pspline()\].
+((k-1) x (k-1)) and the objects needed by \[predict_pspline()\].
 
 ## References
 

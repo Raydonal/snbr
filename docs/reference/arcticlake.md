@@ -15,17 +15,17 @@ arcticlake
 
 A data frame with 39 rows and 5 variables:
 
-  - depth:
-    
-    water depth (m).
+- depth:
 
-  - sand, silt, clay:
-    
-    proportions of the three grain sizes.
+  water depth (m).
 
-  - logit\_clay:
-    
-    `log(clay / (1 - clay))`.
+- sand, silt, clay:
+
+  proportions of the three grain sizes.
+
+- logit_clay:
+
+  `log(clay / (1 - clay))`.
 
 ## Source
 

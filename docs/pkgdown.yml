@@ -1,9 +1,9 @@
-pandoc: 2.9.2.1
+pandoc: 3.1.3
 pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   snbr: snbr.html
-last_built: 2026-10-08T17:41Z
+last_built: 2026-10-09T20:38Z
 urls:
   reference: https://raydonal.github.io/snbr/reference
   article: https://raydonal.github.io/snbr/articles

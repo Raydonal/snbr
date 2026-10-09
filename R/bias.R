@@ -58,8 +58,8 @@ sn_info <- function(theta, X, cu = NULL) {
   K[p + 1L, p + 1L] <- n * W[2, 2]
   K[p + 1L, p + 2L] <- K[p + 2L, p + 1L] <- n * W[2, 3]
   K[p + 2L, p + 2L] <- n * W[3, 3]
-  nm <- c(colnames(X), "sigma", "alpha")
-  if (length(nm) == p + 2L) dimnames(K) <- list(nm, nm)
+  nm <- .coef_names(X)
+  dimnames(K) <- list(nm, nm)
   K
 }
 
@@ -99,6 +99,6 @@ sn_bias <- function(theta, X, S = NULL, lambda = 0, cu = NULL) {
     }
   }
   out <- drop(Hi %*% .jtv(X, d))
-  names(out) <- c(colnames(X), "sigma", "alpha")[seq_along(out)]
+  names(out) <- .coef_names(X)
   out
 }

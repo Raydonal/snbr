@@ -92,7 +92,12 @@ print.snbr <- function(x, digits = 4, ...) {
   if (!is.null(x$smooth)) cat("Smooth term in", x$smooth$var, " (edf of the model", format(x$edf, digits = 3), ")\n")
   th <- x$coefficients
   print(th[c(seq_len(x$p_lin), length(th) - 1L, length(th))], digits = digits)
-  if (isFALSE(x$finite_mle)) cat("The maximum likelihood estimate of the shape is infinite.\n")
+  if (isFALSE(x$finite_mle)) {
+    cat("The maximum likelihood estimate of the shape is infinite:",
+        "no finite value of alpha maximizes the likelihood, so this is not a",
+        "numerical failure. Refit with method = \"mean\" or \"median\" for a",
+        "finite, bias-reduced estimate.\n", sep = "\n")
+  }
   invisible(x)
 }
 
@@ -116,7 +121,12 @@ print.summary.snbr <- function(x, ...) {
   stats::printCoefmat(x$table, na.print = "")
   cat("\nLog-likelihood:", format(x$object$loglik, digits = 6),
       " (effective df", format(x$object$edf, digits = 3), ")\n")
-  if (isFALSE(x$object$finite_mle)) cat("The maximum likelihood estimate of the shape is infinite.\n")
+  if (isFALSE(x$object$finite_mle)) {
+    cat("The maximum likelihood estimate of the shape is infinite:",
+        "no finite value of alpha maximizes the likelihood, so this is not a",
+        "numerical failure. Refit with method = \"mean\" or \"median\" for a",
+        "finite, bias-reduced estimate.\n", sep = "\n")
+  }
   invisible(x)
 }
 

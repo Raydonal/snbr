@@ -4,8 +4,8 @@ Solves the adjusted score equations of Firth (1993) (\`type = "mean"\`)
 or of Kenne Pagui, Salvan and Sartori (2017) (\`type = "median"\`) for
 all parameters of the skew-normal regression model, by the quasi
 Fisher-scoring iteration of Kosmidis and Firth (2010). A quadratic
-penalty \\(\\lambda \\theta^\\top S \\theta/2\\) can be added (mean
-adjustment only), as used for the semiparametric model.
+penalty \\\lambda \theta^\top S \theta/2\\ can be added (mean adjustment
+only), as used for the semiparametric model.
 
 ## Usage
 
@@ -24,29 +24,29 @@ sn_br(
 
 ## Arguments
 
-  - X:
-    
-    model matrix.
+- X:
 
-  - y:
-    
-    response.
+  model matrix.
 
-  - type:
-    
-    \`"mean"\` or \`"median"\`.
+- y:
 
-  - start:
-    
-    optional starting value.
+  response.
 
-  - S, lambda:
-    
-    optional penalty.
+- type:
 
-  - maxit, tol:
-    
-    iteration controls.
+  \`"mean"\` or \`"median"\`.
+
+- start:
+
+  optional starting value.
+
+- S, lambda:
+
+  optional penalty.
+
+- maxit, tol:
+
+  iteration controls.
 
 ## Value
 

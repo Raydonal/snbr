@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">snbr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,8 @@
 
 
 
-<script src="snbr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Getting started with snbr</h1>
             
@@ -72,13 +73,20 @@
 <p>The package fits regression models with skew-normal errors, <span class="math display">\[
 y_i = \mathbf{x}_i^\top\beta + \varepsilon_i,\qquad
 \varepsilon_i \sim \mathrm{SN}(0, \sigma, \alpha),
-\]</span> and a partially linear version in which one covariate enters through a penalized B-spline. Four estimators are available: maximum likelihood, the corrective estimator that subtracts the Cox and Snell second-order bias, and the mean and median bias-reducing adjusted score estimators.</p>
+\]</span> and a partially linear version in which one covariate enters
+through a penalized B-spline. Four estimators are available: maximum
+likelihood, the corrective estimator that subtracts the Cox and Snell
+second-order bias, and the mean and median bias-reducing adjusted score
+estimators.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://raydonal.github.io/snbr/">snbr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="the-arctic-lake-data">The Arctic lake data<a class="anchor" aria-label="anchor" href="#the-arctic-lake-data"></a>
 </h2>
-<p>The data set <code>arcticlake</code> gives the sand, silt and clay proportions of 39 sediment samples taken at different depths of an Arctic lake. We model the logit of the clay proportion as a quadratic function of depth, with depth expressed in hundreds of metres.</p>
+<p>The data set <code>arcticlake</code> gives the sand, silt and clay
+proportions of 39 sediment samples taken at different depths of an
+Arctic lake. We model the logit of the clay proportion as a quadratic
+function of depth, with depth expressed in hundreds of metres.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">arcticlake</span><span class="op">$</span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">arcticlake</span><span class="op">$</span><span class="va">depth</span> <span class="op">/</span> <span class="fl">100</span></span>
 <span><span class="va">fit_ml</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/snreg.html">snreg</a></span><span class="op">(</span><span class="va">logit_clay</span> <span class="op">~</span> <span class="va">d</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">arcticlake</span>, method <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
@@ -86,15 +94,23 @@ y_i = \mathbf{x}_i^\top\beta + \varepsilon_i,\qquad
 <span><span class="co">#&gt; Skew-normal regression, method: ML </span></span>
 <span><span class="co">#&gt; (Intercept)           d      I(d^2)       sigma       alpha </span></span>
 <span><span class="co">#&gt;      -2.238       7.882      -5.512       1.403        -Inf </span></span>
-<span><span class="co">#&gt; The maximum likelihood estimate of the shape is infinite.</span></span></code></pre></div>
-<p>The maximum likelihood estimate of the shape is minus infinity. The decision is exact: <code><a href="../reference/sn_mle.html">sn_mle()</a></code> compares the best finite value of the log-likelihood with its limit as <span class="math inline">\(\alpha \to \pm\infty\)</span>, which is the log-likelihood of a half-normal regression fitted by constrained least squares.</p>
+<span><span class="co">#&gt; The maximum likelihood estimate of the shape is infinite:</span></span>
+<span><span class="co">#&gt; no finite value of alpha maximizes the likelihood, so this is not a</span></span>
+<span><span class="co">#&gt; numerical failure. Refit with method = "mean" or "median" for a</span></span>
+<span><span class="co">#&gt; finite, bias-reduced estimate.</span></span></code></pre></div>
+<p>The maximum likelihood estimate of the shape is minus infinity. The
+decision is exact: <code><a href="../reference/sn_mle.html">sn_mle()</a></code> compares the best finite value
+of the log-likelihood with its limit as <span class="math inline">\(\alpha \to \pm\infty\)</span>, which is the
+log-likelihood of a half-normal regression fitted by constrained least
+squares.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sn_mle.html">sn_mle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">arcticlake</span><span class="op">$</span><span class="va">d</span>, <span class="va">arcticlake</span><span class="op">$</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, <span class="va">arcticlake</span><span class="op">$</span><span class="va">logit_clay</span><span class="op">)</span></span>
 <span><span class="va">f</span><span class="op">$</span><span class="va">loglik_limit</span>   <span class="co"># limits as alpha -&gt; -Inf and alpha -&gt; +Inf</span></span>
 <span><span class="co">#&gt; [1] -41.52189 -63.38143</span></span>
 <span><span class="va">f</span><span class="op">$</span><span class="va">finite</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
-<p>The corrective estimator needs a finite maximum likelihood estimate and is therefore not available. The adjusted score estimators are:</p>
+<p>The corrective estimator needs a finite maximum likelihood estimate
+and is therefore not available. The adjusted score estimators are:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/snreg.html">snreg</a></span><span class="op">(</span><span class="va">logit_clay</span> <span class="op">~</span> <span class="va">d</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">arcticlake</span>, method <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
 <span><span class="va">fit_med</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/snreg.html">snreg</a></span><span class="op">(</span><span class="va">logit_clay</span> <span class="op">~</span> <span class="va">d</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">arcticlake</span>, method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span>
@@ -123,7 +139,10 @@ y_i = \mathbf{x}_i^\top\beta + \varepsilon_i,\qquad
 <div class="section level2">
 <h2 id="a-smooth-effect-of-depth">A smooth effect of depth<a class="anchor" aria-label="anchor" href="#a-smooth-effect-of-depth"></a>
 </h2>
-<p>The quadratic was chosen by the authors of the earlier analysis among a few alternatives. A penalized spline lets the data decide; the smoothing parameter is chosen by AIC with effective degrees of freedom.</p>
+<p>The quadratic was chosen by the authors of the earlier analysis among
+a few alternatives. A penalized spline lets the data decide; the
+smoothing parameter is chosen by AIC with effective degrees of
+freedom.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/snreg.html">snreg</a></span><span class="op">(</span><span class="va">logit_clay</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">arcticlake</span>, smooth <span class="op">=</span> <span class="st">"d"</span>, method <span class="op">=</span> <span class="st">"mean"</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">fit_s</span></span>
@@ -146,17 +165,22 @@ y_i = \mathbf{x}_i^\top\beta + \varepsilon_i,\qquad
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"location"</span>, <span class="st">"mean"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#14365d"</span>, <span class="st">"#e8a33d"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="snbr_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="Logit of clay proportion against depth with the fitted location and mean curves." width="576"></p>
-<p>The solid line is the location <span class="math inline">\(\mathbf{x}_i^\top\beta + f(t_i)\)</span> and the dashed line the mean. With a negative shape the errors are skewed to the left, so the location lies above the bulk of the data and the mean below it.</p>
+<p>The solid line is the location <span class="math inline">\(\mathbf{x}_i^\top\beta + f(t_i)\)</span> and the
+dashed line the mean. With a negative shape the errors are skewed to the
+left, so the location lies above the bulk of the data and the mean below
+it.</p>
 </div>
 <div class="section level2">
 <h2 id="second-order-bias">Second-order bias<a class="anchor" aria-label="anchor" href="#second-order-bias"></a>
 </h2>
-<p><code><a href="../reference/sn_bias.html">sn_bias()</a></code> evaluates the Cox and Snell bias at any parameter value; it is the ingredient of both the corrective and the mean bias-reducing estimators.</p>
+<p><code><a href="../reference/sn_bias.html">sn_bias()</a></code> evaluates the Cox and Snell bias at any
+parameter value; it is the ingredient of both the corrective and the
+mean bias-reducing estimators.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/sn_bias.html">sn_bias</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span>, <span class="va">X</span><span class="op">)</span></span>
-<span><span class="co">#&gt;        sigma        alpha         &lt;NA&gt;         &lt;NA&gt; </span></span>
+<span><span class="co">#&gt;        beta1        beta2        sigma        alpha </span></span>
 <span><span class="co">#&gt;  0.014351341 -0.005007298 -0.017226608  1.829311658</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

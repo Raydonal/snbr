@@ -14,19 +14,19 @@ sn_hessian(theta, X, y)
 
 ## Arguments
 
-  - theta:
-    
-    \`c(beta, sigma, alpha)\`.
+- theta:
 
-  - X:
-    
-    model matrix (n x p).
+  \`c(beta, sigma, alpha)\`.
 
-  - y:
-    
-    response vector.
+- X:
+
+  model matrix (n x p).
+
+- y:
+
+  response vector.
 
 ## Value
 
-\`sn\_loglik()\` returns a scalar, \`sn\_score()\` a vector of length
-\\(p+2\\), \`sn\_hessian()\` the observed Hessian matrix.
+\`sn_loglik()\` returns a scalar, \`sn_score()\` a vector of length
+\\p+2\\, \`sn_hessian()\` the observed Hessian matrix.

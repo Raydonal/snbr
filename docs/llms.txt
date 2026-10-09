@@ -7,16 +7,16 @@ The maximum likelihood estimate of the shape parameter of the
 skew-normal distribution is infinite with positive probability in finite
 samples, and when it is finite its bias can be large. `snbr` provides
 
-  - maximum likelihood estimation with an exact test of whether the
-    estimate of the shape is infinite (comparison with the limiting
-    half-normal regression, computed by constrained least squares);
-  - the second-order (Cox and Snell) bias of all parameters, computed
-    from exact cumulants of the log-likelihood derivatives;
-  - the corrective estimator and the mean (Firth) and median (Kenne
-    Pagui, Salvan and Sartori) bias-reducing adjusted score estimators,
-    for the location coefficients, scale and shape jointly;
-  - a partially linear model with a P-spline term, with the second-order
-    bias of the penalized estimator at a fixed smoothing parameter.
+- maximum likelihood estimation with an exact test of whether the
+  estimate of the shape is infinite (comparison with the limiting
+  half-normal regression, computed by constrained least squares);
+- the second-order (Cox and Snell) bias of all parameters, computed from
+  exact cumulants of the log-likelihood derivatives;
+- the corrective estimator and the mean (Firth) and median (Kenne Pagui,
+  Salvan and Sartori) bias-reducing adjusted score estimators, for the
+  location coefficients, scale and shape jointly;
+- a partially linear model with a P-spline term, with the second-order
+  bias of the penalized estimator at a fixed smoothing parameter.
 
 ## Installation
 
@@ -48,55 +48,56 @@ regression. Manuscript.
 Maximum likelihood with exact detection of infinite shape estimates, and
 the corrective and preventive bias-reduced estimators.
 
-<!-- end list -->
-
-  - `snreg()` : Skew-normal regression with bias reduction
-  - `sn_mle()` : Maximum likelihood fit of the skew-normal regression
-    model
-  - `sn_br()` : Bias-reducing adjusted score estimators
-  - `sn_correct()` : Corrective (Cox and Snell) bias-corrected estimator
-  - `sn_boot()` : Parametric bootstrap bias correction
-  - `snplm()` : Partially linear skew-normal regression with bias
-    reduction
+- [`snreg()`](https://raydonal.github.io/snbr/reference/snreg.md) :
+  Skew-normal regression with bias reduction
+- [`sn_mle()`](https://raydonal.github.io/snbr/reference/sn_mle.md) :
+  Maximum likelihood fit of the skew-normal regression model
+- [`sn_br()`](https://raydonal.github.io/snbr/reference/sn_br.md) :
+  Bias-reducing adjusted score estimators
+- [`sn_correct()`](https://raydonal.github.io/snbr/reference/sn_correct.md)
+  : Corrective (Cox and Snell) bias-corrected estimator
+- [`sn_boot()`](https://raydonal.github.io/snbr/reference/sn_boot.md) :
+  Parametric bootstrap bias correction
+- [`snplm()`](https://raydonal.github.io/snbr/reference/snplm.md) :
+  Partially linear skew-normal regression with bias reduction
 
 ## Second-order bias and information
 
-<!-- end list -->
-
-  - `sn_bias()` : Second-order bias of the (penalized) maximum
-    likelihood estimator
-  - `sn_info()` : Expected information of the skew-normal regression
-    model
-  - `sn_cumulants()` : Exact unit cumulants of the skew-normal
-    log-likelihood derivatives
-  - `sn_cumulants_fast()` : Unit cumulants by interpolation
+- [`sn_bias()`](https://raydonal.github.io/snbr/reference/sn_bias.md) :
+  Second-order bias of the (penalized) maximum likelihood estimator
+- [`sn_info()`](https://raydonal.github.io/snbr/reference/sn_info.md) :
+  Expected information of the skew-normal regression model
+- [`sn_cumulants()`](https://raydonal.github.io/snbr/reference/sn_cumulants.md)
+  : Exact unit cumulants of the skew-normal log-likelihood derivatives
+- [`sn_cumulants_fast()`](https://raydonal.github.io/snbr/reference/sn_cumulants_fast.md)
+  : Unit cumulants by interpolation
 
 ## Likelihood
 
-<!-- end list -->
-
-  - `sn_loglik()` `sn_score()` `sn_hessian()` : Log-likelihood and score
-    of the skew-normal regression model
-  - `rsnorm()` : Random generation from the skew-normal distribution
-  - `psnorm()` : Skew-normal distribution function
+- [`sn_loglik()`](https://raydonal.github.io/snbr/reference/sn_loglik.md)
+  [`sn_score()`](https://raydonal.github.io/snbr/reference/sn_loglik.md)
+  [`sn_hessian()`](https://raydonal.github.io/snbr/reference/sn_loglik.md)
+  : Log-likelihood and score of the skew-normal regression model
+- [`rsnorm()`](https://raydonal.github.io/snbr/reference/rsnorm.md) :
+  Random generation from the skew-normal distribution
+- [`psnorm()`](https://raydonal.github.io/snbr/reference/psnorm.md) :
+  Skew-normal distribution function
 
 ## Smooth terms
 
-<!-- end list -->
-
-  - `pspline_basis()` : P-spline basis with a sum-to-zero constraint
-  - `predict_pspline()` : Evaluate a fitted P-spline component at new
-    points
+- [`pspline_basis()`](https://raydonal.github.io/snbr/reference/pspline_basis.md)
+  : P-spline basis with a sum-to-zero constraint
+- [`predict_pspline()`](https://raydonal.github.io/snbr/reference/predict_pspline.md)
+  : Evaluate a fitted P-spline component at new points
 
 ## Data
 
-<!-- end list -->
-
-  - `arcticlake` : Arctic lake sediments
+- [`arcticlake`](https://raydonal.github.io/snbr/reference/arcticlake.md)
+  : Arctic lake sediments
 
 # Articles
 
 ### Get started
 
-  - [Getting started with
-    snbr](https://raydonal.github.io/snbr/articles/snbr.md):
+- [Getting started with
+  snbr](https://raydonal.github.io/snbr/articles/snbr.md):

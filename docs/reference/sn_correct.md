@@ -1,8 +1,8 @@
 # Corrective (Cox and Snell) bias-corrected estimator
 
-Returns \\(\\tilde\\theta = \\hat\\theta - b(\\hat\\theta)\\), with
-\\(b\\) the second-order bias of \[sn\_bias()\]. Not defined when the
-maximum likelihood estimate of the shape is infinite.
+Returns \\\tilde\theta = \hat\theta - b(\hat\theta)\\, with \\b\\ the
+second-order bias of \[sn_bias()\]. Not defined when the maximum
+likelihood estimate of the shape is infinite.
 
 ## Usage
 
@@ -12,13 +12,13 @@ sn_correct(theta, X)
 
 ## Arguments
 
-  - theta:
-    
-    maximum likelihood estimate.
+- theta:
 
-  - X:
-    
-    model matrix.
+  maximum likelihood estimate.
+
+- X:
+
+  model matrix.
 
 ## Value
 

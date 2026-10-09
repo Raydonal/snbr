@@ -1,12 +1,12 @@
 # Partially linear skew-normal regression with bias reduction
 
-Fits \\(y\_i = x\_i^\\top\\beta + f(t\_i) + \\varepsilon\_i\\),
-\\(\\varepsilon\_i \\sim SN(0, \\sigma, \\alpha)\\), with \\(f\\) a
-P-spline. For a fixed smoothing parameter the estimating equation is the
-penalized score, optionally corrected by the mean bias-reducing
-adjustment computed with the penalized information \\(H = K + \\lambda
-S\\). The smoothing parameter is chosen on a grid by AIC with effective
-degrees of freedom \\(\\mathrm{tr}(H^{-1}K)\\).
+Fits \\y_i = x_i^\top\beta + f(t_i) + \varepsilon_i\\, \\\varepsilon_i
+\sim SN(0, \sigma, \alpha)\\, with \\f\\ a P-spline. For a fixed
+smoothing parameter the estimating equation is the penalized score,
+optionally corrected by the mean bias-reducing adjustment computed with
+the penalized information \\H = K + \lambda S\\. The smoothing parameter
+is chosen on a grid by AIC with effective degrees of freedom
+\\\mathrm{tr}(H^{-1}K)\\.
 
 ## Usage
 
@@ -24,35 +24,35 @@ snplm(
 
 ## Arguments
 
-  - X:
-    
-    linear part of the model matrix (including the intercept).
+- X:
 
-  - t:
-    
-    covariate of the smooth term.
+  linear part of the model matrix (including the intercept).
 
-  - y:
-    
-    response.
+- t:
 
-  - method:
-    
-    \`"ML"\` (penalized likelihood) or \`"BR"\` (penalized likelihood
-    with the mean bias-reducing adjustment).
+  covariate of the smooth term.
 
-  - k:
-    
-    basis dimension.
+- y:
 
-  - lambda:
-    
-    optional fixed smoothing parameter; if \`NULL\` it is selected from
-    \`lambda\_grid\`.
+  response.
 
-  - lambda\_grid:
-    
-    grid of candidate values.
+- method:
+
+  \`"ML"\` (penalized likelihood) or \`"BR"\` (penalized likelihood with
+  the mean bias-reducing adjustment).
+
+- k:
+
+  basis dimension.
+
+- lambda:
+
+  optional fixed smoothing parameter; if \`NULL\` it is selected from
+  \`lambda_grid\`.
+
+- lambda_grid:
+
+  grid of candidate values.
 
 ## Value
 

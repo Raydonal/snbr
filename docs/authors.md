@@ -2,11 +2,11 @@
 
 ## Authors
 
-  - **Enio A. C. Lopes**. Author.
+- **Enio A. C. Lopes**. Author.
 
-  - **Klaus L. P. Vasconcellos**. Author.
+- **Klaus L. P. Vasconcellos**. Author.
 
-  - **Raydonal Ospina**. Author, maintainer.
+- **Raydonal Ospina**. Author, maintainer.
 
 ## Citation
 

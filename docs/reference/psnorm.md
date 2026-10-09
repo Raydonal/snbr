@@ -10,13 +10,13 @@ psnorm(q, xi = 0, omega = 1, alpha = 0)
 
 ## Arguments
 
-  - q:
-    
-    quantiles.
+- q:
 
-  - xi, omega, alpha:
-    
-    location, scale and shape.
+  quantiles.
+
+- xi, omega, alpha:
+
+  location, scale and shape.
 
 ## Value
 
